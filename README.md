@@ -145,3 +145,21 @@ For instance, `mypow(3)` should print
 8
 ```
 > Don't forget to void `%rax` before calling `printf`
+
+## strcat_2
+Create a function `void my_strcat2(char *dst,char *src)` that concatenates `src` into `dst`, **without jumps**
+
+> To do so, look for rep patterns, like `rep movsb`
+>
+> You can use previous functions, and call them using `call my_strlen` for example
+
+## cat
+
+Create an executable that prints the content of a file, like `cat`.
+- if wrong number of arguments, exit with code 1
+- if file can't be opened, exit with code 2
+- otherwise exit with code 0
+- you can't read/write 1 char at time (use buffer)
+- you can't use stdio functions like `puts`, `fopen`, `fread`, `fclose`, `printf`
+
+> For syscalls, 1 = sys_write, 0 = sys_read, 2 = sys_open, 3 = sys_close
