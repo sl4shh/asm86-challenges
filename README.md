@@ -91,6 +91,10 @@ int main() {
 }
 ```
 
+## facto
+Create a function `size_t facto(size_t n)` that returns the factorial of `n`
+> `mul %rdx` means `%rax = %rax * %rdx`
+
 ## strlen
 Create a function `size_t my_strlen(char *s)` that returns the length of string
 
@@ -145,6 +149,13 @@ For instance, `mypow(3)` should print
 8
 ```
 > Don't forget to void `%rax` before calling `printf`
+
+## itoa
+Create a function `char* itoa(int n,char *s,size_t base)` that converts an integer to a string
+We consider base to be between 2 and 16, and s is large enough to store the result
+For example `itoa(-42,s,10)` should store "-42" in s
+And `itoa(42,s,2)` should store "101010" in s
+And `itoa(42,s,16)` should store "2A" in s
 
 ## strcat_2
 Create a function `void my_strcat2(char *dst,char *src)` that concatenates `src` into `dst`, **without jumps**
