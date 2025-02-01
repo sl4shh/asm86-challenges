@@ -1,9 +1,11 @@
 # Challenges
 Good luck for ASM exams
 
-Always use this Makefile to test
+Always use this Makefile to test, Makefile are given in exams
 
-Avoid cheating with https://godbolt.org/
+Avoid cheating with https://godbolt.org/, you won't have it in exams
+Same for code generation with `gcc -S` (especially in finals)
+
 ```Makefile
 all:
 	gcc -fPIE *.[cs] -c
@@ -91,12 +93,20 @@ int main() {
 }
 ```
 
-## facto
+## facto (midterm)
 Create a function `size_t facto(size_t n)` that returns the factorial of `n`
 > `mul %rdx` means `%rax = %rax * %rdx`
 
+## cpuvendor (final)
+Create a function `char* cpuvendor(void)` that returns the CPU vendor
+> You should use `cpuid` instruction, result depends on the CPU (GenuineIntel, AuthenticAMD, ...)
+
 ## strlen
 Create a function `size_t my_strlen(char *s)` that returns the length of string
+
+## strchr (final)
+Create a function `char* strchr(char *s,char c)` that returns the first occurence of `c` in `s`
+or NULL if not found
 
 ## strcpy
 Create a function `void my_strcpy(char *dst,char *src)` that copies `src` into `dst`
@@ -117,7 +127,7 @@ Create a function `void my_memcpy(void *dst,void *src,size_t n)` that copies `n`
 ## strcat
 Create a function `void my_strcat(char *dst,char *src)` that concatenates `src` into `dst`
 
-## strlen_2
+## strlen_2 (final)
 Create a function `size_t my_strlen2(char *s)` that returns the length of string, **without jumps**
 
 > To do so, look for rep patterns, like `repnz scasb`
@@ -132,7 +142,7 @@ Create a function `void my_strcpy2(char *dst,char *src)` that copies `src` into 
 
 > To do so, look for rep patterns, like `rep movsb`
 
-## atoi
+## atoi (midterm)
 Create a function `int my_atoi(char *s)` that converts a string to an integer
 - It must handle negative numbers
 - exit(1) on invalid input / error
@@ -164,7 +174,7 @@ Create a function `void my_strcat2(char *dst,char *src)` that concatenates `src`
 >
 > You can use previous functions, and call them using `call my_strlen` for example
 
-## cat
+## cat (final)
 
 Create an executable that prints the content of a file, like `cat`.
 - if wrong number of arguments, exit with code 1
