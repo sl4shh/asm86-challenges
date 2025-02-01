@@ -97,10 +97,6 @@ int main() {
 Create a function `size_t facto(size_t n)` that returns the factorial of `n`
 > `mul %rdx` means `%rax = %rax * %rdx`
 
-## cpuvendor (final)
-Create a function `char* cpuvendor(void)` that returns the CPU vendor
-> You should use `cpuid` instruction, result depends on the CPU (GenuineIntel, AuthenticAMD, ...)
-
 ## strlen
 Create a function `size_t my_strlen(char *s)` that returns the length of string
 
@@ -126,6 +122,11 @@ Create a function `void my_memcpy(void *dst,void *src,size_t n)` that copies `n`
 
 ## strcat
 Create a function `void my_strcat(char *dst,char *src)` that concatenates `src` into `dst`
+
+## cpuvendor (final)
+Create a function `char* cpuvendor(void)` that returns the CPU vendor
+> You should use `cpuid` instruction, result depends on the CPU (GenuineIntel, AuthenticAMD, ...)
+> Think of using `lea` to store the result in a buffer
 
 ## strlen_2 (final)
 Create a function `size_t my_strlen2(char *s)` that returns the length of string, **without jumps**
@@ -173,6 +174,24 @@ Create a function `void my_strcat2(char *dst,char *src)` that concatenates `src`
 > To do so, look for rep patterns, like `rep movsb`
 >
 > You can use previous functions, and call them using `call my_strlen` for example
+
+## print_fibo
+Create a function `void print_fibo(size_t n)` that `printf` the n first fibonacci numbers
+
+
+For instance, `print_fibo(7)` should print
+
+```
+0
+1
+1
+2
+3
+5
+8
+```
+> Don't forget to void `%rax` before calling `printf`
+> The stack needs to be 16-aligned, think of callee saved registers
 
 ## cat (final)
 
