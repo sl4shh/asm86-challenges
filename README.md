@@ -175,7 +175,7 @@ Create a function `void my_strcat2(char *dst,char *src)` that concatenates `src`
 >
 > You can use previous functions, and call them using `call my_strlen` for example
 
-## print_fibo
+## print_fibo (final)
 Create a function `void print_fibo(size_t n)` that `printf` the n first fibonacci numbers
 
 

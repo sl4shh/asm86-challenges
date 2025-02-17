@@ -1,45 +1,53 @@
-.section .data
+.global main
+.section .bss
 buffer:
-	.asciz "12345678"
+    .skip 8
 
 .section .text
-.global main
 main:
-_checkArgs:
-	cmp $2,%edi
-	jne	_wrongNbArgs
-_openFile:
-	mov $2,%rax
-	mov 8(%rsi),%rdi
-	mov $0,%rsi
-	syscall
-_checkFileOpen:
-	test %rax, %rax
-	js   _cantOpen
-_read8char:
-	mov %rax,%rdi
-	xor %rax,%rax
-	lea buffer(%rip),%rsi
-	mov $8,%rdx
-	syscall
-_write8char:
-	mov %rax,%rdx
-	mov $1,%rax
-	# TODO
+    # CHECK ARGV
+    push %rbp
+    mov %rbp, %rsp
 
-_exitFile:
-	mov %rax,%rdi
-	mov $3,%rax
-	syscall
+	cmp $2,%rdi
+    jne .exit1
 
-_goodExit:
-	xor %rax,%rax
-	ret
+    # OPEN FILE, CHECK IT
+    mov $2,%rax # SYSCALL_OPEN
+    mov 8(%rsi),%rdi # filename
+    xor %rsi,%rsi # readonly
+    syscall
 
-_cantOpen:
-	mov $2,%rax
-	ret
+    cmp $0,%rax
+    jl .exit2
+    mov %rax,%r8 # r8 = fd
 
-_wrongNbArgs:
-	mov $1,%rax
-	ret
+.read:
+    mov %r8,%rdi # int fd
+    mov $buffer,%rsi # char buffer[8]
+    mov $8,%rdx # int bufferSize=8
+    xor %rax,%rax # SYSCALL_READ
+    syscall
+    cmp $0,%rax
+    je .exit0
+
+    mov $1,%rax
+    mov $1,%rdi
+    mov $buffer,%rsi
+    syscall
+    jmp .read
+
+.exit0:
+	mov $0,%rdi
+	jmp .exit
+.exit1:
+	mov $1,%rdi
+	jmp .exit
+.exit2:
+	mov $2,%rdi
+	jmp .exit
+.exit:
+    mov $60, %rax    # SYSCALL_EXIT
+    syscall
+    pop %rbp
+    ret
