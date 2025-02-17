@@ -1,16 +1,16 @@
-.global _start
-.extern printf
+.section .rodata
 
+.global main
 .section .text
+
 main:
-    mov $hello_world, %rdi 
-    xor %rax, %rax       
-    call printf
+    subq  $8,          %rsp # so the stack is 16-aligned when calling printf
+    xor   %rax,        %rax
+    movq  $.buffer,    %rdi 
+    call  printf
+    xor   %rax,        %rax
+    addq  $8,          %rsp
+    ret
 
-    mov $60, %rax
-    xor %rdi, %rdi
-    syscall
-
-.section .data
-hello_world:
-    .string "Hello, World!\n"
+.buffer:
+    .string "Hello World!\n"
